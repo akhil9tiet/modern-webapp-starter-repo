@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useReducer } from "react"
 import { Box, Paragraph, Heading, Input, Flex, Button, styled } from "reakit"
 import { theme } from "styled-tools"
 import posed, { PoseGroup } from "react-pose"
@@ -37,6 +37,7 @@ const Strike = styled.span`
   }
 `
 
+// use onClick to dispatch a toggle done action
 const ListItem = ({ itemName, done }) => (
   <Item justifyContent="space-between">
     <ItemName as="span">
@@ -69,15 +70,34 @@ const NewItem = ({ dispatch }) => {
   )
 }
 
-const GroceryList = ({ listId }) => {
-  const groceries = [
-    { itemName: "beer", done: false, key: 1 },
-    { itemName: "pizza", done: true, key: 2 },
-  ]
+// add a toggleDone action that changes the done property on an item
+// use index to identify which item you're changing
+function reducer(state, action) {
+  switch (action.type) {
+    case "addItem":
+      return [
+        ...state,
+        {
+          itemName: action.itemName,
+          key: new Date().toISOString(),
+        },
+      ]
+    default:
+      throw Error("Unnknown action")
+  }
+}
+
+const GroceryList = ({ listId, initialState }) => {
+  const [listName, setListName] = useState(initialState.listName)
+  const [groceries, dispatch] = useReducer(reducer, initialState.groceries)
 
   return (
     <Box>
-      <TitleInput value="Workshop Party" placeholder="Give your list a name" />
+      <TitleInput
+        value={listName}
+        onChange={event => setListName(event.target.value)}
+        placeholder="Give your list a name"
+      />
       {/* Render a Paragraph if groceries is empty */}
       {!groceries.length ? (
         <Paragraph>Add some items to your list 👇</Paragraph>
@@ -85,9 +105,9 @@ const GroceryList = ({ listId }) => {
       {/* Loop through groceries and render a ListItem component for each */}
       {/* ListItem should take props { itemName, done }; render itemName with Strike when th eitem is done */}
       {groceries.map((item, index) => (
-        <ListItem {...item} key={item.key} />
+        <ListItem {...item} index={index} key={item.key} />
       ))}
-      <NewItem />
+      <NewItem dispatch={dispatch} />
     </Box>
   )
 }

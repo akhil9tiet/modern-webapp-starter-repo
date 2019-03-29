@@ -12,9 +12,7 @@ import { StaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import { CenterColumn, theme } from "../styles"
 import { Provider, Grid } from "reakit"
-
 import "./layout.css"
-import { styles } from "ansi-colors"
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -45,7 +43,7 @@ const Layout = ({ children }) => (
             </CenterColumn>
           </Grid.Item>
         </Grid>
-      </Provider> 
+      </Provider>
     )}
   />
 )
