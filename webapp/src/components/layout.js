@@ -30,31 +30,22 @@ const Layout = ({ children }) => (
     render={data => (
       <Provider theme={theme}>
         <Grid templateRows="120px 1fr 20px" style={{ minHeight: "700px" }}>
+          {/* Change these elements to Grid.Item and use CenterColumn inside for centering */}
           <Grid.Item>
             <Header siteTitle={data.site.siteMetadata.title} />
           </Grid.Item>
           <Grid.Item>
-            <CenterColumn as="main">
-              <div
-                style={{
-                  margin: `0 auto`,
-                  maxWidth: 960,
-                  padding: `0px 1.0875rem 1.45rem`,
-                  paddingTop: 0,
-                }}
-              >
-                <main>{children}</main>
-              </div>
+            <CenterColumn as="main">{children}</CenterColumn>
+          </Grid.Item>
+          <Grid.Item>
+            <CenterColumn as="footer">
+              © {new Date().getFullYear()}, Built with
+              {` `}
+              <a href="https://www.gatsbyjs.org">Gatsby</a>
             </CenterColumn>
           </Grid.Item>
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
-          <Grid.Item />
         </Grid>
-      </Provider>
+      </Provider> 
     )}
   />
 )
