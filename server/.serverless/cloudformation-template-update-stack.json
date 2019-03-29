@@ -103,7 +103,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/grocerylist-workshop-api/dev/1553899626958-2019-03-29T22:47:06.958Z/grocerylist-workshop-api.zip"
+          "S3Key": "serverless/grocerylist-workshop-api/dev/1553900249619-2019-03-29T22:57:29.619Z/grocerylist-workshop-api.zip"
         },
         "FunctionName": "grocerylist-workshop-api-dev-hello",
         "Handler": "hello.world",
@@ -201,7 +201,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1553899623987": {
+    "ApiGatewayDeployment1553900246804": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
